@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		5D42468A2D3EC92000CDC936 /* ExyteChat in Frameworks */ = {isa = PBXBuildFile; productRef = 5D4246892D3EC92000CDC936 /* ExyteChat */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		5D90278C2D3AA77900270363 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -29,9 +33,22 @@
 		5D9027952D3AA77900270363 /* ReliefBoxUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReliefBoxUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		5D4246D72D3EE22F00CDC936 /* Exceptions for "ReliefBox" folder in "ReliefBox" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 5D90277A2D3AA77600270363 /* ReliefBox */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		5D90277D2D3AA77600270363 /* ReliefBox */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				5D4246D72D3EE22F00CDC936 /* Exceptions for "ReliefBox" folder in "ReliefBox" target */,
+			);
 			path = ReliefBox;
 			sourceTree = "<group>";
 		};
@@ -52,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D42468A2D3EC92000CDC936 /* ExyteChat in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +130,7 @@
 			);
 			name = ReliefBox;
 			packageProductDependencies = (
+				5D4246892D3EC92000CDC936 /* ExyteChat */,
 			);
 			productName = ReliefBox;
 			productReference = 5D90277B2D3AA77600270363 /* ReliefBox.app */;
@@ -195,6 +214,9 @@
 			);
 			mainGroup = 5D9027722D3AA77600270363;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				5D4246882D3EC92000CDC936 /* XCRemoteSwiftPackageReference "Chat" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5D90277C2D3AA77600270363 /* Products */;
 			projectDirPath = "";
@@ -396,13 +418,20 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ReliefBox/Preview Content\"";
+				DEVELOPMENT_TEAM = DNKSZAL6M9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ReliefBox/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.medical";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the microphone library to allow users to record audio messages.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app requires access to the photo library to allow users to upload photos.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -424,13 +453,20 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ReliefBox/Preview Content\"";
+				DEVELOPMENT_TEAM = DNKSZAL6M9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ReliefBox/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.medical";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the microphone library to allow users to record audio messages.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app requires access to the photo library to allow users to upload photos.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -522,7 +558,7 @@
 				5D90279E2D3AA77900270363 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		5D90279F2D3AA77900270363 /* Build configuration list for PBXNativeTarget "ReliefBox" */ = {
 			isa = XCConfigurationList;
@@ -531,7 +567,7 @@
 				5D9027A12D3AA77900270363 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		5D9027A22D3AA77900270363 /* Build configuration list for PBXNativeTarget "ReliefBoxTests" */ = {
 			isa = XCConfigurationList;
@@ -540,7 +576,7 @@
 				5D9027A42D3AA77900270363 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		5D9027A52D3AA77900270363 /* Build configuration list for PBXNativeTarget "ReliefBoxUITests" */ = {
 			isa = XCConfigurationList;
@@ -549,9 +585,28 @@
 				5D9027A72D3AA77900270363 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5D4246882D3EC92000CDC936 /* XCRemoteSwiftPackageReference "Chat" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/Chat.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5D4246892D3EC92000CDC936 /* ExyteChat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5D4246882D3EC92000CDC936 /* XCRemoteSwiftPackageReference "Chat" */;
+			productName = ExyteChat;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5D9027732D3AA77600270363 /* Project object */;
 }

@@ -1,24 +1,19 @@
-//
-//  ContentView.swift
-//  ReliefBox
-//
-//  Created by Diyorbek Ibragimov on 17/01/2025.
-//
-
 import SwiftUI
+import ExyteChat
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
-    }
-}
+    @StateObject private var viewModel = ChatViewModel()
 
-#Preview {
-    ContentView()
+    var body: some View {
+        NavigationView {
+            VStack {
+                ChatView(messages: viewModel.messages) { draft in
+                    viewModel.send(draft: draft)
+                }
+                .navigationTitle("ReliefBox") // Set the navigation bar title
+                .navigationBarTitleDisplayMode(.inline) // Inline title display
+                .padding()
+            }
+        }
+    }
 }
