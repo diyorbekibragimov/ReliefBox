@@ -7,30 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5D42468A2D3EC92000CDC936 /* ExyteChat in Frameworks */ = {isa = PBXBuildFile; productRef = 5D4246892D3EC92000CDC936 /* ExyteChat */; };
+		9F225EBB2D40413300137E81 /* bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9F225EBA2D40413300137E81 /* bundle */; };
+		9F225ED62D404FBE00137E81 /* MLCSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9F225ED52D404FBE00137E81 /* MLCSwift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		5D90278C2D3AA77900270363 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5D9027732D3AA77600270363 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 5D90277A2D3AA77600270363;
-			remoteInfo = ReliefBox;
-		};
-		5D9027962D3AA77900270363 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5D9027732D3AA77600270363 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 5D90277A2D3AA77600270363;
-			remoteInfo = ReliefBox;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		5D90277B2D3AA77600270363 /* ReliefBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReliefBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		5D90278B2D3AA77900270363 /* ReliefBoxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReliefBoxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5D9027952D3AA77900270363 /* ReliefBoxUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReliefBoxUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F225EBA2D40413300137E81 /* bundle */ = {isa = PBXFileReference; lastKnownFileType = folder; name = bundle; path = dist/bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -52,16 +35,6 @@
 			path = ReliefBox;
 			sourceTree = "<group>";
 		};
-		5D90278E2D3AA77900270363 /* ReliefBoxTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = ReliefBoxTests;
-			sourceTree = "<group>";
-		};
-		5D9027982D3AA77900270363 /* ReliefBoxUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = ReliefBoxUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,21 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5D42468A2D3EC92000CDC936 /* ExyteChat in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5D9027882D3AA77900270363 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5D9027922D3AA77900270363 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				9F225ED62D404FBE00137E81 /* MLCSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,9 +52,8 @@
 		5D9027722D3AA77600270363 = {
 			isa = PBXGroup;
 			children = (
+				9F225EBA2D40413300137E81 /* bundle */,
 				5D90277D2D3AA77600270363 /* ReliefBox */,
-				5D90278E2D3AA77900270363 /* ReliefBoxTests */,
-				5D9027982D3AA77900270363 /* ReliefBoxUITests */,
 				5D90277C2D3AA77600270363 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -104,8 +62,6 @@
 			isa = PBXGroup;
 			children = (
 				5D90277B2D3AA77600270363 /* ReliefBox.app */,
-				5D90278B2D3AA77900270363 /* ReliefBoxTests.xctest */,
-				5D9027952D3AA77900270363 /* ReliefBoxUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -130,57 +86,11 @@
 			);
 			name = ReliefBox;
 			packageProductDependencies = (
-				5D4246892D3EC92000CDC936 /* ExyteChat */,
+				9F225ED52D404FBE00137E81 /* MLCSwift */,
 			);
 			productName = ReliefBox;
 			productReference = 5D90277B2D3AA77600270363 /* ReliefBox.app */;
 			productType = "com.apple.product-type.application";
-		};
-		5D90278A2D3AA77900270363 /* ReliefBoxTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5D9027A22D3AA77900270363 /* Build configuration list for PBXNativeTarget "ReliefBoxTests" */;
-			buildPhases = (
-				5D9027872D3AA77900270363 /* Sources */,
-				5D9027882D3AA77900270363 /* Frameworks */,
-				5D9027892D3AA77900270363 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5D90278D2D3AA77900270363 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				5D90278E2D3AA77900270363 /* ReliefBoxTests */,
-			);
-			name = ReliefBoxTests;
-			packageProductDependencies = (
-			);
-			productName = ReliefBoxTests;
-			productReference = 5D90278B2D3AA77900270363 /* ReliefBoxTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		5D9027942D3AA77900270363 /* ReliefBoxUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5D9027A52D3AA77900270363 /* Build configuration list for PBXNativeTarget "ReliefBoxUITests" */;
-			buildPhases = (
-				5D9027912D3AA77900270363 /* Sources */,
-				5D9027922D3AA77900270363 /* Frameworks */,
-				5D9027932D3AA77900270363 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5D9027972D3AA77900270363 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				5D9027982D3AA77900270363 /* ReliefBoxUITests */,
-			);
-			name = ReliefBoxUITests;
-			packageProductDependencies = (
-			);
-			productName = ReliefBoxUITests;
-			productReference = 5D9027952D3AA77900270363 /* ReliefBoxUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -195,14 +105,6 @@
 					5D90277A2D3AA77600270363 = {
 						CreatedOnToolsVersion = 16.2;
 					};
-					5D90278A2D3AA77900270363 = {
-						CreatedOnToolsVersion = 16.2;
-						TestTargetID = 5D90277A2D3AA77600270363;
-					};
-					5D9027942D3AA77900270363 = {
-						CreatedOnToolsVersion = 16.2;
-						TestTargetID = 5D90277A2D3AA77600270363;
-					};
 				};
 			};
 			buildConfigurationList = 5D9027762D3AA77600270363 /* Build configuration list for PBXProject "ReliefBox" */;
@@ -215,7 +117,7 @@
 			mainGroup = 5D9027722D3AA77600270363;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				5D4246882D3EC92000CDC936 /* XCRemoteSwiftPackageReference "Chat" */,
+				9F225ED42D404FBE00137E81 /* XCLocalSwiftPackageReference "../mlc-llm/ios/MLCSwift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5D90277C2D3AA77600270363 /* Products */;
@@ -223,8 +125,6 @@
 			projectRoot = "";
 			targets = (
 				5D90277A2D3AA77600270363 /* ReliefBox */,
-				5D90278A2D3AA77900270363 /* ReliefBoxTests */,
-				5D9027942D3AA77900270363 /* ReliefBoxUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -234,20 +134,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5D9027892D3AA77900270363 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5D9027932D3AA77900270363 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				9F225EBB2D40413300137E81 /* bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,34 +148,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5D9027872D3AA77900270363 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5D9027912D3AA77900270363 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		5D90278D2D3AA77900270363 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 5D90277A2D3AA77600270363 /* ReliefBox */;
-			targetProxy = 5D90278C2D3AA77900270363 /* PBXContainerItemProxy */;
-		};
-		5D9027972D3AA77900270363 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 5D90277A2D3AA77600270363 /* ReliefBox */;
-			targetProxy = 5D9027962D3AA77900270363 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		5D90279D2D3AA77900270363 /* Debug */ = {
@@ -344,6 +204,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LIBRARY_SEARCH_PATHS = /Users/hasan/Projects/ReliefBox/dist/lib;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -401,6 +262,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LIBRARY_SEARCH_PATHS = /Users/hasan/Projects/ReliefBox/dist/lib;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -415,10 +277,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ReliefBox/Preview Content\"";
-				DEVELOPMENT_TEAM = DNKSZAL6M9;
+				DEVELOPMENT_TEAM = L6U73V8GSU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ReliefBox/Info.plist;
@@ -436,8 +299,18 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = /Users/hasan/Projects/ReliefBox/dist/lib;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.diyorbek.ReliefBox;
+				OTHER_LDFLAGS = (
+					"-Wl,-all_load",
+					"-lmodel_iphone",
+					"-lmlc_llm",
+					"-ltvm_runtime",
+					"-ltokenizers_cpp",
+					"-lsentencepiece",
+					"-ltokenizers_c",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.hasan.ReliefBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -450,10 +323,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ReliefBox/Preview Content\"";
-				DEVELOPMENT_TEAM = DNKSZAL6M9;
+				DEVELOPMENT_TEAM = L6U73V8GSU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ReliefBox/Info.plist;
@@ -471,80 +345,22 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = /Users/hasan/Projects/ReliefBox/dist/lib;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.diyorbek.ReliefBox;
+				OTHER_LDFLAGS = (
+					"-Wl,-all_load",
+					"-lmodel_iphone",
+					"-lmlc_llm",
+					"-ltvm_runtime",
+					"-ltokenizers_cpp",
+					"-lsentencepiece",
+					"-ltokenizers_c",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.hasan.ReliefBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		5D9027A32D3AA77900270363 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.diyorbek.ReliefBoxTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReliefBox.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ReliefBox";
-			};
-			name = Debug;
-		};
-		5D9027A42D3AA77900270363 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.diyorbek.ReliefBoxTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReliefBox.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ReliefBox";
-			};
-			name = Release;
-		};
-		5D9027A62D3AA77900270363 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.diyorbek.ReliefBoxUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ReliefBox;
-			};
-			name = Debug;
-		};
-		5D9027A72D3AA77900270363 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.diyorbek.ReliefBoxUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ReliefBox;
 			};
 			name = Release;
 		};
@@ -569,42 +385,19 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		5D9027A22D3AA77900270363 /* Build configuration list for PBXNativeTarget "ReliefBoxTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5D9027A32D3AA77900270363 /* Debug */,
-				5D9027A42D3AA77900270363 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		5D9027A52D3AA77900270363 /* Build configuration list for PBXNativeTarget "ReliefBoxUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5D9027A62D3AA77900270363 /* Debug */,
-				5D9027A72D3AA77900270363 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		5D4246882D3EC92000CDC936 /* XCRemoteSwiftPackageReference "Chat" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/exyte/Chat.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.1.1;
-			};
+/* Begin XCLocalSwiftPackageReference section */
+		9F225ED42D404FBE00137E81 /* XCLocalSwiftPackageReference "../mlc-llm/ios/MLCSwift" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../mlc-llm/ios/MLCSwift";
 		};
-/* End XCRemoteSwiftPackageReference section */
+/* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5D4246892D3EC92000CDC936 /* ExyteChat */ = {
+		9F225ED52D404FBE00137E81 /* MLCSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5D4246882D3EC92000CDC936 /* XCRemoteSwiftPackageReference "Chat" */;
-			productName = ExyteChat;
+			productName = MLCSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
