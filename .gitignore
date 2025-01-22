@@ -1,0 +1,29 @@
+build/
+dist/
+.DS_Store
+**/.DS_Store
+# --- Swift/ iOS ---
+# Ignore user-specific Xcode files
+*.xcuserdatad/
+*.xcscmblueprint
+*.xcuserdata/
+
+# Ignore build & derived data
+DerivedData/
+build/
+*.xcarchive
+
+# SwiftPM
+/.build/
+Package.resolved
+# or, if you prefer to commit the resolved file, remove the line above
+
+# --- macOS System Files ---
+.DS_Store
+
+# --- Python Virtual Env (optional) ---
+venv/
+.venv/
+mlc-chat-venv/
+
+# Any other ephemeral or personal config
