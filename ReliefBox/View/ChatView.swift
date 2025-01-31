@@ -84,18 +84,6 @@ struct ChatView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            // Header
-            HStack {
-                Image("MedicalKit") // If you want the logo next to text
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 32, height: 32)
-                
-                Text("ReliefBox")
-                    .font(.title)
-                    .bold()
-            }
-            .padding()
             
             // The main chat area
             ScrollViewReader { proxy in

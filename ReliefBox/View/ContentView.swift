@@ -9,19 +9,24 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var llmEngine = LocalLLMEngine()
-    
+    @StateObject private var locationManager = LocationManager() // Initialize here
+
     var body: some View {
         ZStack {
             if llmEngine.isModelLoaded {
-                // Main chat UI
-                ChatView(llmEngine: llmEngine)
+                HomeView(llmEngine: llmEngine)
+                    .environmentObject(locationManager) // Pass to HomeView
                     .transition(.opacity)
             } else {
                 SplashView()
                     .transition(.opacity)
             }
         }
-        // Animate changes in the if/else
         .animation(.easeInOut(duration: 0.8), value: llmEngine.isModelLoaded)
+        .onChange(of: llmEngine.isModelLoaded) { isLoaded in
+            if isLoaded {
+                locationManager.requestLocationPermission() // Request location after splash
+            }
+        }
     }
 }
