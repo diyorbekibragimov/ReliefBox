@@ -36,7 +36,7 @@ struct ReliefBoxApp: App {
         @unknown default: break
         }
     }
-}
+} 
 
 // Core Data Persistent Controller
 struct PersistenceController {
@@ -45,7 +45,7 @@ struct PersistenceController {
     let container: NSPersistentContainer
     
     init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "ReliefBox") // Must match your .xcdatamodeld filename
+        container = NSPersistentContainer(name: "ReliefBox")
         if inMemory {
             container.persistentStoreDescriptions.first?.url = URL(fileURLWithPath: "/dev/null")
         }

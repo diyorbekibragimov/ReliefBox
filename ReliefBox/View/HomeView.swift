@@ -15,8 +15,29 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                // Header
+                // Header with back button
                 ZStack {
+                    // Leading Back Button (Chat View only)
+                    HStack {
+                        if selectedTab == 1 {
+                            Button(action: {
+                                withAnimation {
+                                    selectedTab = 0 // Return to Home
+                                }
+                            }) {
+                                HStack {
+                                    Image(systemName: "chevron.left")
+                                        .font(.system(size: 20))
+                                        .foregroundColor(.blue)
+                                    Spacer()
+                                }
+                                .padding(.leading, 16)
+                            }
+                        }
+                        Spacer()
+                    }
+                    
+                    // Centered Title
                     HStack(spacing: 8) {
                         Spacer()
                         HStack(spacing: 8) {
@@ -31,6 +52,7 @@ struct HomeView: View {
                         Spacer()
                     }
                     
+                    // Trailing Settings Button
                     HStack {
                         Spacer()
                         Button(action: { navigateToSettings = true }) {
@@ -43,8 +65,9 @@ struct HomeView: View {
                     }
                 }
                 .padding()
+                .frame(height: 60)
 
-                // Main Content (flexible space)
+                // Main Content
                 VStack(spacing: 0) {
                     switch selectedTab {
                     case 0: FeedView()
@@ -56,47 +79,49 @@ struct HomeView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
 
                 // Bottom Navigation Bar
-                ZStack {
-                    CurvedTabBarShape()
-                        .fill(Color.white)
-                        .shadow(color: .gray.opacity(0.3), radius: 5, x: 0, y: -2)
-                        .frame(height: 90)
-                        
-                    HStack {
-                        Spacer()
-                        Button(action: { selectedTab = 0 }) {
-                            VStack(spacing: 2) {
-                                Image(systemName: "house.fill")
-                                Text("Home").font(.system(size: 13, weight: .semibold))
+                if selectedTab != 1 {
+                    ZStack {
+                        CurvedTabBarShape()
+                            .fill(Color.white)
+                            .shadow(color: .gray.opacity(0.3), radius: 5, x: 0, y: -2)
+                            .frame(height: 90)
+                            
+                        HStack {
+                            Spacer()
+                            Button(action: { selectedTab = 0 }) {
+                                VStack(spacing: 2) {
+                                    Image(systemName: "house.fill")
+                                    Text("Home").font(.system(size: 13, weight: .semibold))
+                                }
+                                .foregroundColor(selectedTab == 0 ? .blue : .gray)
                             }
-                            .foregroundColor(selectedTab == 0 ? .blue : .gray)
-                        }
-                        Spacer()
-                        Spacer().frame(width: 70)
-                        Spacer()
-                        Button(action: { selectedTab = 2 }) {
-                            VStack(spacing: 2) {
-                                Image(systemName: "cross.case.fill")
-                                Text("MedPoints").font(.system(size: 13, weight: .semibold))
+                            Spacer()
+                            Spacer().frame(width: 70)
+                            Spacer()
+                            Button(action: { selectedTab = 2 }) {
+                                VStack(spacing: 2) {
+                                    Image(systemName: "cross.case.fill")
+                                    Text("MedPoints").font(.system(size: 13, weight: .semibold))
+                                }
+                                .foregroundColor(selectedTab == 2 ? .blue : .gray)
                             }
-                            .foregroundColor(selectedTab == 2 ? .blue : .gray)
+                            Spacer()
                         }
-                        Spacer()
-                    }
-                    .padding(.horizontal, 16)
-                        
-                    Button(action: { selectedTab = 1 }) {
-                        ZStack {
-                            Circle()
-                                .fill(Color.blue)
-                                .frame(width: 70, height: 70)
-                                .shadow(color: .gray.opacity(0.4), radius: 5, x: 0, y: 3)
-                            Image(systemName: "message.fill")
-                                .font(.system(size: 28))
-                                .foregroundColor(.white)
+                        .padding(.horizontal, 16)
+                            
+                        Button(action: { selectedTab = 1 }) {
+                            ZStack {
+                                Circle()
+                                    .fill(Color.blue)
+                                    .frame(width: 70, height: 70)
+                                    .shadow(color: .gray.opacity(0.4), radius: 5, x: 0, y: 3)
+                                Image(systemName: "message.fill")
+                                    .font(.system(size: 28))
+                                    .foregroundColor(.white)
+                            }
                         }
+                        .offset(y: -20)
                     }
-                    .offset(y: -20)
                 }
             }
             .edgesIgnoringSafeArea(.bottom)

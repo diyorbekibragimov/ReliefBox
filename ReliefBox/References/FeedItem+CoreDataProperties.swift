@@ -16,7 +16,7 @@ extension FeedItem {
         return NSFetchRequest<FeedItem>(entityName: "FeedItem")
     }
 
-    @NSManaged public var id: UUID?
+    @NSManaged public var id: Int32
     @NSManaged public var type: String?
     @NSManaged public var content: String?
     @NSManaged public var timestamp: Date?

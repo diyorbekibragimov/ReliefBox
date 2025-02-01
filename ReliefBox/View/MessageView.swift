@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-
 struct MessageView: View {
     let currentMessage: Message
     
@@ -57,7 +56,6 @@ struct MessageView: View {
                         .cornerRadius(12)
                         .frame(maxWidth: UIScreen.main.bounds.width * 0.9, alignment: .leading)
                 }
-
                 Spacer()
             }
         }

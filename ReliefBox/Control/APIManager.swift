@@ -4,7 +4,6 @@
 //
 //  Created by Diyorbek Ibragimov on 01/02/2025.
 //
-
 import Foundation
 import CoreData
 import UserNotifications
@@ -12,35 +11,35 @@ import UserNotifications
 class APIManager {
     static let shared = APIManager()
     private var timer: Timer?
-    private let apiURL = URL(string: "https://reliefbox.hasanbek.me/feed")!
+    private let baseURL = URL(string: "https://reliefbox.hasanbek.me/feed")!
     private let userDefaultsKey = "lastFeedVersion"
-        
-    private var lastVersion: Int64 {
-        get {
-            Int64(UserDefaults.standard.integer(forKey: userDefaultsKey))
-        }
-        set {
-            UserDefaults.standard.set(Int(newValue), forKey: userDefaultsKey)
-        }
-    }
     
+    private var lastVersion: Int64 {
+        get { Int64(UserDefaults.standard.integer(forKey: userDefaultsKey)) }
+        set { UserDefaults.standard.set(Int(newValue), forKey: userDefaultsKey) }
+    }
+
     func startPolling(context: NSManagedObjectContext) {
         stopPolling()
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
             self?.fetchFeedUpdates(context: context)
         }
     }
-    
+
     func stopPolling() {
         timer?.invalidate()
         timer = nil
     }
-    
-    private func fetchFeedUpdates(context: NSManagedObjectContext) {
-        var request = URLRequest(url: apiURL)
-        request.addValue("\(lastVersion)", forHTTPHeaderField: "X-Version")
+
+    func fetchFeedUpdates(context: NSManagedObjectContext) {
+        var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: false)!
+        urlComponents.queryItems = [URLQueryItem(name: "version_id", value: "\(lastVersion)")]
         
-        URLSession.shared.dataTask(with: request) { [weak self] data, _, error in
+        var request = URLRequest(url: urlComponents.url!)
+        request.httpMethod = "GET"
+        request.addValue("application/json", forHTTPHeaderField: "accept")
+
+        URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
             guard let self = self else { return }
             
             if let error = error {
@@ -48,57 +47,63 @@ class APIManager {
                 return
             }
             
-            guard let data = data else { return }
+            guard let httpResponse = response as? HTTPURLResponse else {
+                print("Invalid response type")
+                return
+            }
             
-            do {
-                let decoder = JSONDecoder()
-                let response = try decoder.decode(FeedResponse.self, from: data)
+            switch httpResponse.statusCode {
+            case 204:
+                break // No content
                 
-                if response.version > self.lastVersion {
-                    self.lastVersion = response.version
-                    self.processItems(response.items, context: context)
+            case 200:
+                guard let data = data else {
+                    print("Received empty response for 200 status")
+                    return
                 }
-            } catch {
-                print("Decoding error: \(error)")
+                
+                do {
+                    let response = try JSONDecoder().decode(APIResponse.self, from: data)
+                    self.processUpdates(response, context: context)
+                } catch {
+                    print("Decoding error: \(error)")
+                }
+                
+            default:
+                print("Unexpected status code: \(httpResponse.statusCode)")
             }
         }.resume()
     }
-    
-    func processItems(_ items: [FeedItemData], context: NSManagedObjectContext) {
+
+    private func processUpdates(_ response: APIResponse, context: NSManagedObjectContext) {
         context.performAndWait {
             let existingIDs = getExistingItemIDs(context: context)
-            var hasNewItems = false
-            
-            for itemData in items {
-                guard let itemUUID = UUID(uuidString: itemData.id) else {
-                    print("Invalid UUID format: \(itemData.id)")
-                    continue
-                }
-                
-                guard !existingIDs.contains(itemUUID) else { continue }
+            var maxVersionID = lastVersion // Start with current version
+                    
+            for update in response.updates {
+                guard !existingIDs.contains(Int32(update.id)) else { continue }
                 
                 let newItem = FeedItem(context: context)
-                newItem.id = itemUUID
-                newItem.type = itemData.type
-                newItem.content = itemData.content
-                newItem.timestamp = Date()
+                newItem.id = Int32(update.id)
+                newItem.type = update.type
+                newItem.content = update.content
+                newItem.timestamp = Date(timeIntervalSince1970: TimeInterval(update.created_at))
                 
-                showNotification(title: "New Update", body: itemData.content)
-                hasNewItems = true
+                showNotification(title: "New Update", body: update.content)
+                
+                // Track the highest version_id from updates
+                maxVersionID = max(maxVersionID, Int64(update.version_id))
             }
             
-            if hasNewItems {
-                // Only update version if we actually got new items
-                lastVersion += 1
-            }
-            
+            lastVersion = maxVersionID
+    
             saveContext(context: context)
         }
     }
-    
-    private func getExistingItemIDs(context: NSManagedObjectContext) -> Set<UUID> {
+
+    private func getExistingItemIDs(context: NSManagedObjectContext) -> Set<Int32> {
         let fetchRequest: NSFetchRequest<FeedItem> = FeedItem.fetchRequest()
-        fetchRequest.resultType = .managedObjectIDResultType
+        fetchRequest.propertiesToFetch = ["id"]
         
         do {
             let results = try context.fetch(fetchRequest)
@@ -108,16 +113,16 @@ class APIManager {
             return []
         }
     }
-    
+
     private func saveContext(context: NSManagedObjectContext) {
         do {
             try context.save()
         } catch {
-            print("Error saving context: \(error)")
+            print("Save error: \(error)")
             context.rollback()
         }
     }
-    
+
     private func showNotification(title: String, body: String) {
         let content = UNMutableNotificationContent()
         content.title = title
@@ -132,30 +137,18 @@ class APIManager {
         
         UNUserNotificationCenter.current().add(request)
     }
-    
-    func mockAPICall() -> Data {
-       let mockResponse = FeedResponse(
-           version: lastVersion + 1,
-           items: [
-               FeedItemData(
-                   id: UUID().uuidString,
-                   type: "action",
-                   content: "New mock alert - Pull to refresh worked!"
-               )
-           ]
-       )
-       return try! JSONEncoder().encode(mockResponse)
-   }
 }
 
-struct FeedResponse: Codable {
-    let version: Int64
-    let items: [FeedItemData]
+// MARK: - API Response Models
+struct APIResponse: Codable {
+    let current_server_time: Int64
+    let updates: [APIUpdate]
 }
 
-struct FeedItemData: Codable {
-    let id: String
-    let type: String
+struct APIUpdate: Codable {
+    let id: Int
     let content: String
+    let type: String
+    let version_id: Int64
+    let created_at: Int64
 }
-

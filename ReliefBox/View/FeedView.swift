@@ -10,7 +10,7 @@ import CoreData
 struct FeedView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @State private var selectedFilter: FeedItemType = .all
-    @State private var showingAddItem = false
+    @State private var selectedItem: FeedItem?
     
     @FetchRequest(
         entity: FeedItem.entity(),
@@ -22,39 +22,75 @@ struct FeedView: View {
             VStack(spacing: 0) {
                 // Filter Buttons
                 HStack(spacing: 20) {
-                    FilterButton(title: "All",
-                               isSelected: selectedFilter == .all) {
+                    FilterButton(title: "All", isSelected: selectedFilter == .all) {
                         selectedFilter = .all
                     }
-                    FilterButton(title: "Actions",
-                               isSelected: selectedFilter == .action) {
+                    FilterButton(title: "Actions", isSelected: selectedFilter == .action) {
                         selectedFilter = .action
                     }
-                    FilterButton(title: "Announcements",
-                               isSelected: selectedFilter == .announcement) {
+                    FilterButton(title: "Announcements", isSelected: selectedFilter == .announcement) {
                         selectedFilter = .announcement
                     }
                 }
                 .padding()
                 .background(Color(.systemBackground))
                 
-                // Feed List
+                // Feed List with Swipe-to-Delete
                 List {
                     ForEach(filteredItems) { item in
-                        FeedItemView(item: item)
-                            .listRowSeparator(.hidden)
-                            .listRowInsets(EdgeInsets())
-                            .listRowBackground(Color.clear)
+                        FeedItemView(item: item) {
+                            selectedItem = item
+                        }
+                        .listRowSeparator(.hidden)
+                        .listRowInsets(EdgeInsets())
+                        .listRowBackground(Color.clear)
                     }
+                    .onDelete(perform: deleteItems)
                 }
                 .listStyle(.plain)
                 .refreshable { fetchLatestItems() }
             }
+            .sheet(item: $selectedItem) { item in
+                DetailView(item: item)
+            }
             .onAppear {
                 requestNotificationPermission()
-                insertSampleDataIfNeeded()
             }
         }
+    }
+    
+    // MARK: - Deletion Logic
+    private func deleteItems(at offsets: IndexSet) {
+        let itemsToDelete = offsets.map { filteredItems[$0] }
+        let deletedIDs = itemsToDelete.map { Int($0.id) }
+        
+        itemsToDelete.forEach { viewContext.delete($0) }
+        
+        do {
+            try viewContext.save()
+            updateDeletedIDs(with: deletedIDs)
+        } catch {
+            print("Deletion error: \(error.localizedDescription)")
+        }
+    }
+    
+    private func updateDeletedIDs(with newIDs: [Int]) {
+        var currentIDs = UserDefaults.standard.array(forKey: "deletedItemIDs") as? [Int] ?? []
+        currentIDs.append(contentsOf: newIDs)
+        UserDefaults.standard.set(currentIDs, forKey: "deletedItemIDs")
+    }
+
+    // MARK: - Core Data Operations
+    private var filteredItems: [FeedItem] {
+        switch selectedFilter {
+        case .all: return Array(allItems)
+        case .action: return allItems.filter { $0.type == "action" }
+        case .announcement: return allItems.filter { $0.type == "announcement" }
+        }
+    }
+    
+    private func fetchLatestItems() {
+        APIManager.shared.fetchFeedUpdates(context: viewContext)
     }
     
     private func requestNotificationPermission() {
@@ -66,56 +102,12 @@ struct FeedView: View {
             }
         }
     }
-    
-    // MARK: - Core Data Operations
-    private var filteredItems: [FeedItem] {
-        switch selectedFilter {
-        case .all: return Array(allItems)
-        case .action: return allItems.filter { $0.type == "action" }
-        case .announcement: return allItems.filter { $0.type == "announcement" }
-        }
-    }
-    
-    private func fetchLatestItems() {
-        // Replace with real API call later
-        let mockData = APIManager.shared.mockAPICall()
-        
-        do {
-            let response = try JSONDecoder().decode(FeedResponse.self, from: mockData)
-            APIManager.shared.processItems(response.items, context: viewContext)
-        } catch {
-            print("Error processing mock data: \(error)")
-        }
-    }
-    
-    private func insertSampleDataIfNeeded() {
-        guard allItems.isEmpty else { return }
-        
-        let sampleItems = [
-            ("action", "Emergency Alert: Severe weather warning", Date().addingTimeInterval(-3600)),
-            ("announcement", "New feature: Location sharing added", Date().addingTimeInterval(-7200)),
-            ("action", "System Update: Security patches installed", Date().addingTimeInterval(-10800))
-        ]
-        
-        sampleItems.forEach { type, content, timestamp in
-            let newItem = FeedItem(context: viewContext)
-            newItem.id = UUID()
-            newItem.type = type
-            newItem.content = content
-            newItem.timestamp = timestamp
-        }
-        
-        do {
-            try viewContext.save()
-        } catch {
-            print("Error saving sample data: \(error.localizedDescription)")
-        }
-    }
 }
 
-// MARK: - Feed Item View
+// MARK: - Feed Item View (unchanged)
 struct FeedItemView: View {
     let item: FeedItem
+    var onTap: () -> Void
     
     var body: some View {
         HStack(alignment: .top, spacing: 16) {
@@ -136,21 +128,26 @@ struct FeedItemView: View {
             }
             
             Spacer()
+            
+            Image(systemName: "chevron.right")
+                .foregroundColor(.gray)
         }
         .padding()
         .background(Color(.systemBackground))
         .cornerRadius(12)
         .shadow(color: .black.opacity(0.05), radius: 5, x: 0, y: 2)
         .padding(.horizontal)
+        .contentShape(Rectangle())
+        .onTapGesture(perform: onTap)
     }
     
     private var iconForType: some View {
         ZStack {
             Circle()
-                .fill(item.type == "action" ? Color.red : Color.blue)
+                .fill(item.type == "action" ? Color.blue : Color.red)
                 .frame(width: 28, height: 28)
             
-            Image(systemName: item.type == "action" ? "exclamationmark.triangle" : "megaphone")
+            Image(systemName: item.type == "action" ? "bolt" : "exclamationmark.triangle")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 14)
@@ -159,7 +156,59 @@ struct FeedItemView: View {
     }
 }
 
-// MARK: - Filter Button Component
+// MARK: - Detail View (unchanged)
+struct DetailView: View {
+    let item: FeedItem
+    @Environment(\.dismiss) var dismiss
+    
+    var body: some View {
+        NavigationView {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 16) {
+                    HStack {
+                        iconForType
+                        Text(item.type ?? "")
+                            .font(.subheadline)
+                            .foregroundColor(.blue)
+                        Spacer()
+                    }
+                    
+                    Text(item.content ?? "")
+                        .font(.body)
+                    
+                    if let timestamp = item.timestamp {
+                        Text("Posted \(timestamp.formatted(.dateTime.day().month().year().hour().minute()))")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
+                }
+                .padding()
+            }
+            .navigationTitle("Details")
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button("Done") { dismiss() }
+                }
+            }
+        }
+    }
+    
+    private var iconForType: some View {
+        ZStack {
+            Circle()
+                .fill(item.type == "action" ? Color.blue : Color.red)
+                .frame(width: 28, height: 28)
+            
+            Image(systemName: item.type == "action" ? "bolt" : "exclamationmark.triangle")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 14)
+                .foregroundColor(.white)
+        }
+    }
+}
+
+// MARK: - Filter Button Component (unchanged)
 struct FilterButton: View {
     let title: String
     let isSelected: Bool
@@ -182,8 +231,7 @@ struct FilterButton: View {
     }
 }
 
-
-// MARK: - Data Types
+// MARK: - Data Types (unchanged)
 enum FeedItemType: String, CaseIterable {
     case all = "all"
     case action = "action"
