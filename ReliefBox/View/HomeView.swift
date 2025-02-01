@@ -67,16 +67,17 @@ struct HomeView: View {
                 .padding()
                 .frame(height: 60)
 
-                // Main Content
                 VStack(spacing: 0) {
                     switch selectedTab {
                     case 0: FeedView()
                     case 1: ChatView(llmEngine: llmEngine)
+                        .padding(.bottom, 20) // Add bottom padding
                     case 2: MedPointsView()
                     default: EmptyView()
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color(.systemBackground))
 
                 // Bottom Navigation Bar
                 if selectedTab != 1 {

@@ -34,10 +34,11 @@ struct ChatView: View {
                             MessageView(currentMessage: messages[index])
                                 .id(index)
                                 .padding(.horizontal)
+                                .padding(.vertical, 4) // Add vertical spacing
                         }
                     }
                     .padding(.vertical)
-                    .padding(.bottom, 60)
+                    .padding(.bottom, 80) // Increase bottom padding
                 }
                 .onChange(of: messages) { _ in
                     scrollToBottom(proxy: proxy)
