@@ -13,6 +13,7 @@
 		5D4FECB62D4D999300F1A685 /* FeedItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4FECB32D4D999300F1A685 /* FeedItem+CoreDataClass.swift */; };
 		5D4FECBE2D4DE11300F1A685 /* Just in Frameworks */ = {isa = PBXBuildFile; productRef = 5D4FECBD2D4DE11300F1A685 /* Just */; };
 		9F225EBB2D40413300137E81 /* bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9F225EBA2D40413300137E81 /* bundle */; };
+		9F93C3872D4DE5C80041ED86 /* MLCSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9F225ED52D404FBE00137E81 /* MLCSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F93C3872D4DE5C80041ED86 /* MLCSwift in Frameworks */,
 				5D4FECA82D4D96DB00F1A685 /* GoogleMaps in Frameworks */,
 				5D4FECBE2D4DE11300F1A685 /* Just in Frameworks */,
 				5D4FEC2F2D4CDDD000F1A685 /* MLCSwift in Frameworks */,
@@ -298,7 +300,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ReliefBox/Preview Content\"";
-				DEVELOPMENT_TEAM = DNKSZAL6M9;
+				DEVELOPMENT_TEAM = L6U73V8GSU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ReliefBox/Info.plist;
@@ -331,7 +333,7 @@
 					"-lsentencepiece",
 					"-ltokenizers_c",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.diyorbek.ReliefBox;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hasanhkmj.ReliefBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -348,7 +350,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ReliefBox/Preview Content\"";
-				DEVELOPMENT_TEAM = DNKSZAL6M9;
+				DEVELOPMENT_TEAM = L6U73V8GSU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ReliefBox/Info.plist;
@@ -381,7 +383,7 @@
 					"-lsentencepiece",
 					"-ltokenizers_c",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.diyorbek.ReliefBox;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hasanhkmj.ReliefBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

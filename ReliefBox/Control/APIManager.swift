@@ -7,6 +7,7 @@
 import Foundation
 import CoreData
 import UserNotifications
+import AudioToolbox
 
 class APIManager {
     static let shared = APIManager()
@@ -57,6 +58,8 @@ class APIManager {
                 break // No content
                 
             case 200:
+                // Play system notification sound
+                AudioServicesPlaySystemSound(1007) // System sound ID for notification
                 guard let data = data else {
                     print("Received empty response for 200 status")
                     return
